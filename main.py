@@ -1,5 +1,4 @@
 # Python
-import imp
 from typing import Optional
 from enum import Enum
 
@@ -27,24 +26,41 @@ class HairColor(Enum):
 class Person(BaseModel):
     first_name: str = Field(
         min_Length=1,
-        max_Length=50
+        max_Length=50,
+        example="Marlon"
     )
     last_name: str = Field(
         min_Length=1,
-        max_Length=50
+        max_Length=50,
+        example="Rangel"
     )
     age: int = Field(
         gt=0,
-        le=115
+        le=115,
+        example=24
+
     )
-    hair_color: Optional[HairColor] = Field(default=None)  # null
-    is_married: Optional[bool] = Field(default=None)
+    hair_color: Optional[HairColor] = Field(
+        default=None,
+        example="black")  # null
+    is_married: Optional[bool] = Field(default=None, example=False)
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "first_name": "Marlon",
+                "last_name": "Jaimes Rangel",
+                "age": 24,
+                "hair_color": "black",
+                "is_married": False
+            }
+        }
 
 
 class Location(BaseModel):
-    city: str
-    state: str
-    country: str
+    city: str = Field(default=None, example="Toledo")
+    state: str = Field(default=None, example="Departamento cualquiera XD")
+    country: str = Field(default=None, example="Colombia")
 
 
 # path operation decorator
