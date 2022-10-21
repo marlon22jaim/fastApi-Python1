@@ -86,14 +86,20 @@ def show_person(
         min_length=1,
         max_length=50,
         title="Person Name",
-        description="This is the person name, It's between 1 and 50 characters"
+        description="This is the person name, It's between 1 and 50 characters",
+        example="Artico"
     ),
     age: str = Query(
         title="Person Age",
-        description="This is the person age. It's required"
+        description="This is the person age. It's required",
+        example=10
     ),
-    age2: int = Query(),
-    age3: str = Query(None)
+    age2: int = Query(
+        example=10
+    ),
+    age3: str = Query(
+        None,
+        example=10)
 ):
     return [{name}, {age: age2}, {age2}]
 
@@ -104,7 +110,8 @@ def show_person(
     person_id: int = Path(
         gt=0,
         title="Person id",
-        description="This is the Person ID. It's required"
+        description="This is the Person ID. It's required",
+        example=54378910
     )
 ):
     return {person_id: "It exist!"}
@@ -116,7 +123,8 @@ def update_person(
     person_id: int = Path(
         title="Person ID",
         description="This is the person ID",
-        gt=0
+        gt=0,
+        example=54378910
     ),
     person: Person = Body(),
     location: Location = Body()
